@@ -1,7 +1,7 @@
 sts-quora
 ==============================
 
-Sentence to sentence semantic similarity
+Sentence to sentence semantic similarity on quora questions
 
 Project Organization
 ------------
