@@ -9,6 +9,7 @@ BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
 PROJECT_NAME = sts-quora
 PYTHON_INTERPRETER = python3
+DATASET_NAME = quora-question-pairs
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -27,6 +28,9 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
+	kaggle competitions download -c $(DATASET_NAME) -p data/raw
+	unzip data/raw/$(DATASET_NAME).zip -d data/raw
+	chmod 644 data/raw/*.csv
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
