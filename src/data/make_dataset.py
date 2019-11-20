@@ -3,7 +3,8 @@ import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-
+from clean import clean_set
+import os
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
@@ -15,6 +16,9 @@ def main(input_filepath, output_filepath):
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
 
+    for file in os.listdir(input_filepath):
+        if file in ['train.csv', 'test.csv']:
+            clean_set(input_filepath, output_filepath, file)
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
