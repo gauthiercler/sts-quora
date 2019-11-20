@@ -29,7 +29,7 @@ requirements: test_environment
 ## Make Dataset
 data: requirements
 	kaggle competitions download -c $(DATASET_NAME) -p data/raw
-	unzip data/raw/$(DATASET_NAME).zip -d data/raw
+	unzip -o data/raw/$(DATASET_NAME).zip -d data/raw
 	chmod 644 data/raw/*.csv
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
